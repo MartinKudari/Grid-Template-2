@@ -1,0 +1,41 @@
+$bp :(
+    mobile:375px,
+    tablet: 768px,
+    desktop:1440px,
+);
+@mixin query($screen){
+@each $key, $value in $bp{
+        @if ($screen ==$key){
+            @media(max-width: $value){@content;}
+        } 
+}
+    
+}
+*{
+    margin: 0%;
+    padding: 0;
+    box-sizing: border-box;
+    body{
+        font-family: sans-serif;
+        font-family: 30px;
+    }
+}
+[class^="box-"]{
+    display: grid;
+    place-items: center;
+    border: 2px solid blue;
+}
+.container{
+    display: grid;
+    height: 100vh;
+    gap: 10px 10px;
+    grid-template-columns: auto 1fr auto;
+}
+@include query(mobile){
+    .container{
+        grid-template-columns: 100%;
+    }
+    .box-1, .box-2{
+        grid-column: inherit;
+    }
+}
